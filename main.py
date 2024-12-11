@@ -35,7 +35,8 @@ def main():
         null = b'\x00'
         
         print(f"{raw_data.replace(null,b'')}\n\n")
-        print(f"\n{get_card_data(raw_data)}")
+        card_data = get_card_data(raw_data)
+        print(f"\nTrack1: {card_data["1"]}\nTrack2: {card_data["2"]}\nTrack3: {card_data["3"]}")
         print("\n"*3)
 
 def get_clean_data():
