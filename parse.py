@@ -3,6 +3,7 @@
 import re
 
 def get_track_1(raw_data):
+    # Use regex to pull out track1 from the raw data
 
     # Define sentinels and seperators
     SS = b'%'
@@ -24,6 +25,7 @@ def get_track_1(raw_data):
         return data
 
 def get_track_2(raw_data):
+    # Use regex to pull out track2 from the raw data
 
     # Define sentinels and seperators
     SS = b';'
@@ -45,6 +47,7 @@ def get_track_2(raw_data):
 
 
 def get_track_3(raw_data):
+    # Use regex to pull out track3 from the raw data
 
     # Define sentinels and seperators
     SS = b';'
@@ -66,6 +69,8 @@ def get_track_3(raw_data):
 
 
 def get_tracks_from_raw_data(raw_data):
+    # Pull data from all the tracks
+
     return [get_track_1(raw_data),get_track_2(raw_data),get_track_3(raw_data)]
 
 
@@ -76,11 +81,6 @@ def parse_raw_data(raw_data):
     card_data["3"] = tracks.pop()
     card_data["2"] = tracks.pop()
     card_data["1"] = tracks.pop()
-
-    #tracknum = ["Track1", "Track2", "Track3"]
-    #for i in range(len(tracknum)):
-    #    card_data[tracknum[i]] = tracks[i]
-    #    print(tracks[i])
 
     return card_data
 
