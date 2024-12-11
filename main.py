@@ -1,7 +1,8 @@
-#! /usr/bin/python
+#! /usr/bin/env python3
 
 from read import *
 from parse import *
+from files import *
 
 def get_intro():
     return """
@@ -15,16 +16,9 @@ def get_intro():
                \___/'                            
     """
 
-def get_card_data(device):
-    raw_data = read(device)
+def get_card_data(raw_data):
     card_data = parse_raw_data(raw_data)
-
     return card_data
-
-def get_card_string(device):
-    card = get_card_data(device)
-
-    return card
 
 def main():
     print(get_intro())
@@ -33,9 +27,20 @@ def main():
     if device is None:
         return
     while True:
+        print("-"*49)
+        raw_data = read(device)
+        #raw_data = get_clean_data()
+
+        save_data('./test', raw_data)
+        null = b'\x00'
         
-        print(f"\n{get_card_string(device)}")
+        print(f"{raw_data.replace(null,b'')}\n\n")
+        print(f"\n{get_card_data(raw_data)}")
         print("\n"*3)
+
+def get_clean_data():
+    return b'%+PAN123456789012345^NAMENAMENAME^DATA^SHOULDNTBREAK?X;PAN123456789012345=DATACVV?;+PAN123456789012345=DATABLAH?X'
+        
 
 if __name__ == "__main__":
     main()
