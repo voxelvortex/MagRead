@@ -31,13 +31,15 @@ def main():
         raw_data = read(device)
         #raw_data = get_clean_data()
 
-        save_data('./test', raw_data)
         null = b'\x00'
         
         print(f"{raw_data.replace(null,b'')}\n\n")
         card_data = get_card_data(raw_data)
         print(f"\nTrack1: {card_data["1"]}\nTrack2: {card_data["2"]}\nTrack3: {card_data["3"]}")
+        check_for_save(raw_data,card_data)
+
         print("\n"*3)
+
 
 def get_clean_data():
     return b'%+PAN123456789012345^NAMENAMENAME^DATA^SHOULDNTBREAK?X;PAN123456789012345=DATACVV?;+PAN123456789012345=DATABLAH?X'
